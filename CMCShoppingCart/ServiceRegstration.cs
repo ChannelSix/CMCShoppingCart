@@ -25,9 +25,7 @@ public static class ServiceRegstration
             where t.IsClass && !t.IsAbstract
             let interfaces = t.GetInterfaces()
             where interfaces.Length == 1
-            let iface = interfaces[0]
-            //where iface != typeof(IAsyncStateMachine)  // these are being added dynamically in integration tests
-            select new { InterfaceType = iface, ConcreteType = t };
+            select new { InterfaceType = interfaces[0], ConcreteType = t };
 
         foreach (var typeInfo in concreteTypesWithSingleInterfaceImplementaion)
         {
