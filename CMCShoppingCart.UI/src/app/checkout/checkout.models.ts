@@ -1,8 +1,8 @@
-export interface CheckoutTotalRequest {
-    lineItems: CheckOutTotalLineItem[];
+export interface CheckoutRequest {
+    lineItems: CheckOutRequestLineItem[];
 }
 
-export interface CheckOutTotalLineItem {
+export interface CheckOutRequestLineItem {
     productId: string;
     quantity: number;
 }
@@ -19,4 +19,8 @@ export interface CheckoutTotalLineItemDto {
     quantity: number;
     unitPrice: number;
     totalPrice: number;
+}
+
+export interface CheckoutCompleteDto {
+    orderNo: string;
 }

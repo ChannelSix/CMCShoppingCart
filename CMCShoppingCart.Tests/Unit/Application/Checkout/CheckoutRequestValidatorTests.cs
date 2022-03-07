@@ -11,9 +11,9 @@ namespace CMCShoppingCart.Tests.Unit.Application.Checkout
         {
             // arrange
             GetMock<IProductRepository>().AllIdsExist(Arg.Any<Guid>()).Returns(false);
-            var request = new CheckoutTotalRequest
+            var request = new CheckoutRequest
             {
-                LineItems = new() { new CheckOutTotalLineItem() }
+                LineItems = new() { new CheckOutRequestLineItem() }
             };
 
             // act

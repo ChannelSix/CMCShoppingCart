@@ -11,7 +11,7 @@ public class GetCheckoutTotalRequestTests
     public void PropertyValidation_ReturnsCorrectValidationMessages(bool setToNull, string messageKey)
     {
         // arrange
-        var request = new CheckoutTotalRequest 
+        var request = new CheckoutRequest 
         {
 #pragma warning disable CS8601 // Possible null reference assignment.
             LineItems = setToNull ? null : new()

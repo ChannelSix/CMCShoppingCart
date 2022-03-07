@@ -1,11 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subject, takeUntil, tap } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { AppState, removeProductFromBasket, ShoppingBasket } from '../store/exports';
 import { CheckoutService } from './checkout.service';
-import { CheckoutTotalDto, CheckoutTotalLineItemDto, CheckOutTotalLineItem, CheckoutTotalRequest } from './checkout.models';
+import { CheckoutHelperService } from './checkout-helper.service';
+import { CheckoutTotalDto, CheckoutTotalLineItemDto } from './checkout.models';
 
 @Component({
+    styleUrls: ['./checkout.component.scss'],
     templateUrl: './checkout.component.html'
 })
 export class CheckoutComponent implements OnInit, OnDestroy {
@@ -15,7 +17,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     isEmpty: boolean|undefined;
     totals: CheckoutTotalDto|undefined;    
 
-    constructor(private checkoutService: CheckoutService, private store: Store<AppState>){        
+    constructor(private checkoutHelperService: CheckoutHelperService, private checkoutService: CheckoutService, private store: Store<AppState>){        
     }
 
     ngOnInit(): void {
@@ -34,7 +36,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     }
 
     private checkForEmptyBasket(sb: ShoppingBasket): void{
-        if (Object.keys(sb).length === 0){
+        const isEmpty = this.checkoutHelperService.isBasketEmpty(sb);
+        if (isEmpty){
             this.isEmpty = true;
         } else {
             this.isEmpty = false;
@@ -43,11 +46,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     }
 
     private getTotals(sb: ShoppingBasket): void{
-        const lineItems: CheckOutTotalLineItem[] = Object.keys(sb)
-            .map<CheckOutTotalLineItem>(k => ({ productId: k, quantity: sb[k] }));
-
-        const request: CheckoutTotalRequest = { lineItems };
-
+        const request = this.checkoutHelperService.toCheckoutRequest(sb);
         this.checkoutService.getTotals(request)
             .subscribe(dto => this.totals = dto);
     }

@@ -24,4 +24,8 @@ export const shoppingBasketReducer = createReducer(
             .forEach(key => result[key] = state[key]);
         return result;
     }),
+    on(Actions.clearBasket, () => {
+        const result: ShoppingBasket = {};
+        return result;
+    }),
   );

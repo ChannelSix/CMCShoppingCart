@@ -5,7 +5,7 @@ namespace CMCShoppingCart.Application.Checkout
 {
     public interface ICheckoutRequestValidator
     {
-        Task<List<string>> GetValidationMessages(CheckoutTotalRequest request);
+        Task<List<string>> GetValidationMessages(CheckoutRequest request);
     }
 
     public class CheckoutRequestValidator : ICheckoutRequestValidator
@@ -17,7 +17,7 @@ namespace CMCShoppingCart.Application.Checkout
             _productRepository = productRepository;
         }
 
-        public async Task<List<string>> GetValidationMessages(CheckoutTotalRequest request)
+        public async Task<List<string>> GetValidationMessages(CheckoutRequest request)
         {
             var result = new List<string>();
 

@@ -6,11 +6,14 @@ namespace CMCShoppingCart.Application.Checkout;
 
 public interface ICheckoutService
 {
-    Task<OneOf<List<string>, CheckoutTotalDto>> GetCheckoutTotal(CheckoutTotalRequest request);
+    CheckoutCompleteDto CheckoutComplete(CheckoutRequest request);
+    Task<OneOf<List<string>, CheckoutTotalDto>> GetCheckoutTotal(CheckoutRequest request);
 }
 
 public class CheckoutService : ICheckoutService
 {
+    static int _orderCount;
+
     private readonly ICheckoutCalculator _checkoutCalculator;
     private readonly ICheckoutRequestValidator _checkoutRequestValidator;
 
@@ -22,7 +25,7 @@ public class CheckoutService : ICheckoutService
         _checkoutRequestValidator = checkoutRequestValidator;
     }
 
-    public async Task<OneOf<List<string>, CheckoutTotalDto>> GetCheckoutTotal(CheckoutTotalRequest request)
+    public async Task<OneOf<List<string>, CheckoutTotalDto>> GetCheckoutTotal(CheckoutRequest request)
     {
         // validate request
         var validationResults = await _checkoutRequestValidator.GetValidationMessages(request);
@@ -48,7 +51,16 @@ public class CheckoutService : ICheckoutService
         return result;
     }
 
-    private IDictionary<Guid, int> GetProductIdTotals(CheckoutTotalRequest request)
+    public CheckoutCompleteDto CheckoutComplete(CheckoutRequest request)
+    {
+        var orderNumber = Interlocked.Increment(ref _orderCount);
+        var padded = $"00000{orderNumber}";
+        var orderNumberString = padded.Substring(padded.Length - 6);
+        var result = new CheckoutCompleteDto { OrderNo = orderNumberString };
+        return result;
+    }
+
+    private IDictionary<Guid, int> GetProductIdTotals(CheckoutRequest request)
     {
         var result = request.LineItems
             .GroupBy(li => li.ProductId)

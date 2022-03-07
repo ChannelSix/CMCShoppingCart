@@ -16,12 +16,12 @@ public class CheckoutControllerTests
         var productRepository = serviceProvider.GetServiceOrThrow<IProductRepository>();
         var allProducts = (await productRepository.GetAll()).ToList();
         var controller = serviceProvider.GetServiceOrThrow<CheckoutController>();
-        var request = new CheckoutTotalRequest
+        var request = new CheckoutRequest
         {
             LineItems = new()
             {
-                new CheckOutTotalLineItem { ProductId = allProducts[0].Id, Quantity = 2 },
-                new CheckOutTotalLineItem { ProductId = allProducts[1].Id, Quantity = 3 },
+                new CheckOutRequestLineItem { ProductId = allProducts[0].Id, Quantity = 2 },
+                new CheckOutRequestLineItem { ProductId = allProducts[1].Id, Quantity = 3 },
             }
         };
 

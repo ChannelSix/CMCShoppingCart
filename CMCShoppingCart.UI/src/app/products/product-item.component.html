@@ -8,10 +8,10 @@
             <div fxFlex="20" fxLayoutAlign="end center">
                 {{ product?.unitPrice | currency}}
             </div>
-            <div fxFlex="20" fxLayoutAlign="end center" *ngIf="!isBuying">
-                <button mat-stroked-button color="primary" (click)="onInitialBuy()">Buy</button>
+            <div fxFlex="20" fxLayoutAlign="end center">
+                <button mat-stroked-button color="primary" (click)="onBuy()">Buy</button>
             </div>
-            <div fxFlex="20" fxLayoutAlign="end center" *ngIf="isBuying">
+            <!-- <div fxFlex="20" fxLayoutAlign="end center" *ngIf="isBuying">
                 <div fxLayoutAlign="end center" fxFill>
                     <mat-form-field appearance="fill" class="quantity-input">
                         <mat-label>Quantity</mat-label>
@@ -26,7 +26,7 @@
                         <mat-icon>close</mat-icon>
                     </button>    
                 </div>
-            </div>
+            </div> -->
         </div>
     </mat-card-content>
 </mat-card>

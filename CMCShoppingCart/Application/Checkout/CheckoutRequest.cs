@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CMCShoppingCart.Application.Checkout;
 
-public class CheckoutTotalRequest
+public class CheckoutRequest
 {
     [Required(ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.CheckoutTotalLineItemsExist))]
     [MinLength(1, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.CheckoutTotalLineItemsExist))]
-    public List<CheckOutTotalLineItem> LineItems { get; set; } = new();
+    public List<CheckOutRequestLineItem> LineItems { get; set; } = new();
 }
 
-public class  CheckOutTotalLineItem
+public class  CheckOutRequestLineItem
 { 
     [Required(ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.InvalidProductId))]
     public Guid ProductId { get; set; }
