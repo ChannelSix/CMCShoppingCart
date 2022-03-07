@@ -28,7 +28,7 @@ export class ProductItemComponent{
 
     onBuy(): void{
         if (this.product){
-            const quantity = BigInt(this.quantityControl.value);        
+            const quantity = Number(this.quantityControl.value);        
             const action = addProductToBasket({ productId: this.product.id, quantity });
             this.store.dispatch(action);
             this.quantityControl.setValue(1);

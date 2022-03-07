@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
-
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { CommonModule } from './common.module';
-
 import { AppRoutingModule } from './app-routing.module';
+import { CheckoutModule } from './checkout/checkout.module';
+import { CommonModule } from './common.module';
 import { ProductModule } from './products/product.module';
 
 import { AppComponent } from './app.component';
@@ -22,6 +21,7 @@ import { AddApiUrlInterceptor } from './add-api-url.interceptor';
   ],
   imports: [
     AppRoutingModule,
+    CheckoutModule,
     CommonModule,
     ProductModule,
     StoreModule.forRoot({

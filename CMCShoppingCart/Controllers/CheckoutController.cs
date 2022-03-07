@@ -15,6 +15,25 @@ public class CheckoutController : ControllerBase
     }
 
     [HttpPost]
-    public Task<IActionResult> GetTotals(CheckoutTotalRequest request)
-        => _checkoutService.GetCheckoutTotal(request).ToActionResult();       
+    public async Task<IActionResult> GetTotals(CheckoutTotalRequest request)
+    {
+        var eitherErrorsOrPayload = await _checkoutService.GetCheckoutTotal(request);
+        var result = eitherErrorsOrPayload.Match
+        (
+            errorMessages => GetValidationProblem(errorMessages),
+            payload => Ok(payload)
+        );
+        return result;
+    }
+
+    private IActionResult GetValidationProblem(List<string> errorMessages)
+    {
+        var errorDictionary = new Dictionary<string, string[]>
+        {
+            { string.Empty, errorMessages.ToArray() }
+        };
+        var validationDetails = new ValidationProblemDetails(errorDictionary);
+        var result = ValidationProblem(validationDetails);
+        return result;
+    }
 }

@@ -7,11 +7,11 @@ import { Product } from './product.models';
     templateUrl: './product-list.component.html'
 })
 export class ProductListComponent implements OnInit{
-    products: Observable<Product[]> | undefined;
+    products$: Observable<Product[]> | undefined;
     constructor(private productService: ProductService) {
     }
 
     ngOnInit(): void {
-        this.products = this.productService.getAll();
+        this.products$ = this.productService.getAll();
     }
 }
