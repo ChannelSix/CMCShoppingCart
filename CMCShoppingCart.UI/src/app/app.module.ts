@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { CommonModule } from './common.module';
 
@@ -8,24 +8,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { ProductModule } from './products/product.module';
 
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+
+import { StoreModule } from '@ngrx/store';
+import { shoppingBasketReducer } from './store/reducers';
 
 import { AddApiUrlInterceptor } from './add-api-url.interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent
   ],
   imports: [
-    // infrastructure
-    BrowserAnimationsModule,
-    //BrowserModule,
-    CommonModule,
-    HttpClientModule,
-
-    // custom
     AppRoutingModule,
-    ProductModule
-  ],  
+    CommonModule,
+    ProductModule,
+    StoreModule.forRoot({
+        shoppingBasket: shoppingBasketReducer
+    }),
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

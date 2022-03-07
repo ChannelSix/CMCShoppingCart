@@ -1,0 +1,11 @@
+<div fxLayout fxLayoutAlign="space-between center">
+    <div>
+        CMC Shopping Basket
+    </div>
+    <div *ngIf="itemCount">
+        <button mat-stroked-button color="primary">
+            <mat-icon>shopping_basket</mat-icon>
+            <div class="items-text">{{ itemCount | async}} item(s)</div>
+        </button>
+    </div>
+</div>
