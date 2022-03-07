@@ -1,0 +1,16 @@
+<mat-card *ngIf="product" class="margin-bottom-20px">
+    <mat-card-title>{{ product?.name}}</mat-card-title>
+    <mat-card-content>
+        <div fxLayout >
+            <div fxFlex="60" fxLayoutAlign="start right">
+                {{ product?.description}}
+            </div>
+            <div fxFlex="20" fxLayoutAlign="end center">
+                {{ product?.unitPrice | currency}}
+            </div>
+            <div fxFlex="20" fxLayoutAlign="end center">
+                <button mat-stroked-button color="primary">Buy</button>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

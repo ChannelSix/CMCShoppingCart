@@ -1,0 +1,4 @@
+<h2>Products</h2>
+<div *ngIf="products">
+    <product-item *ngFor="let p of products | async" [product]="p"></product-item>
+</div>
