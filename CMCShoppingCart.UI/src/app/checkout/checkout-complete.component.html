@@ -1,5 +1,5 @@
 <basket-empty *ngIf="isEmpty === true"></basket-empty>
 <div *ngIf="isEmpty === false && response != null">
     <h1>Your order number {{ response?.orderNo }} is complete!</h1>
-    <button mat-stroked-button color="primary" routerLink="/">Go Back</button>
+    <button mat-stroked-button color="primary" routerLink="/">Back to Shopping</button>
 </div>

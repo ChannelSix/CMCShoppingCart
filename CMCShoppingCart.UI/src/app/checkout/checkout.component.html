@@ -1,42 +1,45 @@
 <basket-empty *ngIf="isEmpty === true"></basket-empty>
 <div *ngIf="isEmpty === false && totals != null">
-    <table>
+    <h1>Order Summary</h1>
+    <table class="table">
         <thead>
             <tr>
-                <td>Name</td>
-                <td>Quantity</td>
-                <td>Price per Item</td>
-                <td>Total</td>
-                <td>Remove Item</td>
+                <th>Name</th>
+                <th class="text-align-right">Quantity</th>
+                <th class="text-align-right">Price per Item</th>
+                <th class="text-align-right">Total</th>
+                <th class="text-align-center">Remove Item</th>
             </tr>
         </thead>
-        <!-- line items -->
-        <tr *ngFor="let li of totals.lineItems">
-            <td>{{ li.name }}</td>
-            <td class="text-align-right">{{ li.quantity }}</td>
-            <td class="text-align-right">{{ li.unitPrice | currency }}</td>
-            <td class="text-align-right">{{ li.totalPrice | currency }}</td>
-            <td>
-                <button mat-stroked-button color="warn" (click)="remove(li)">
-                    <mat-icon>close</mat-icon>
-                </button>
-            </td>
-        </tr>
-        <!-- shipping-->
-        <tr>
-            <td colspan="3">Shipping</td>
-            <td class="text-align-right">{{ totals.shipping | currency }}</td>
-            <td></td>
-        </tr>    
-        <!-- total -->
-        <tr>
-            <td colspan="3" class="totals">Total</td>
-            <td class="text-align-right" class="totals">{{ totals.total | currency }}</td>
-            <td></td>
-        </tr>    
+        <tbody>
+            <!-- line items -->
+            <tr *ngFor="let li of totals.lineItems">
+                <td>{{ li.name }}</td>
+                <td class="text-align-right">{{ li.quantity }}</td>
+                <td class="text-align-right">{{ li.unitPrice | currency }}</td>
+                <td class="text-align-right">{{ li.totalPrice | currency }}</td>
+                <td class="text-align-center">
+                    <button mat-icon-button color="warn" (click)="remove(li)" class="remove-button">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </td>
+            </tr>
+            <!-- shipping-->
+            <tr>
+                <td colspan="3">Shipping</td>
+                <td class="text-align-right">{{ totals.shipping | currency }}</td>
+                <td></td>
+            </tr>    
+            <!-- total -->
+            <tr>
+                <td colspan="3" class="totals">Total</td>
+                <td class="text-align-right" class="totals">{{ totals.total | currency }}</td>
+                <td></td>
+            </tr>
+        </tbody>  
     </table>
     <div fxLayout fxLayoutGap="5px">
-        <button mat-stroked-button color="primary" routerLink="../complete">Confirm</button>
-        <button mat-stroked-button color="primary" routerLink="/">Go Back</button>
+        <button mat-stroked-button color="primary" routerLink="../complete">Complete Order</button>
+        <button mat-stroked-button color="primary" routerLink="/">Back to Shopping</button>
     </div>
 </div>
