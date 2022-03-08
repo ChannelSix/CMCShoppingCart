@@ -5,7 +5,7 @@
 
 ## To Run
 - Change directory to the CMCShoppingCart.UI folder and run: `ng serve`
-- Change directory to the CMCShoppingCart folder and run: `dotnet run` or just do it the old fashioned way and open the solutionin Visual Studio.
+- Change directory to the CMCShoppingCart folder and run: `dotnet run` or just do it the old fashioned way and open the solution in Visual Studio.
 - Browse to http://localhost:4200
 
 ## Things to finish / improve on:
