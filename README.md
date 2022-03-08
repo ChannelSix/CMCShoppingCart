@@ -13,3 +13,4 @@
 - Client side unit tests
 - Stronger coverage of server side unit tests
 - Re-implement quantity on purchase (was messing up the styling)
+- Handle not OK http status codes on client (currently we just close our eyes and hope for the best)
